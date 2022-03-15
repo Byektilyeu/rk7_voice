@@ -1,23 +1,23 @@
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.Base64;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
-public class httpPostRequest {
+public class req {
 	
 
 	public String postMessage() throws IOException {
@@ -73,7 +73,8 @@ public class httpPostRequest {
 		DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
 
 		final String msg = "<RK7Query>\r\n"
-				+ " <RK7Command CMD=\"GetOrderList\" >\r\n"
+				+ " <RK7Command CMD=\"GetOrder\">\r\n"
+				+ "  <Order guid=\"{88724AA1-D484-4281-B488-F53021D6E318}\"/>\r\n"
 				+ " </RK7Command>\r\n"
 				+ "</RK7Query>";
 		wr.writeBytes(msg);
@@ -92,36 +93,46 @@ public class httpPostRequest {
  
 		return content.toString();
 	}
-	
-	
-	private static final String [] certs= {"root.cer"};
-	private static final String trustStorePath=System.getProperty("java.io.tmpdir")+File.separator+"test.keystore";
-	private static final char[] password = "123456".toCharArray();
-	public static final String JKS = "JKS";
+
+
+	private static void disableSslVerification() {
+	    try
+	    {
+	        // Create a trust manager that does not validate certificate chains
+	        TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
+	            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+	                return null;
+	            }
+	            public void checkClientTrusted(X509Certificate[] certs, String authType) {
+	            }
+	            public void checkServerTrusted(X509Certificate[] certs, String authType) {
+	            }
+	        }
+	        };
+
+	        // Install the all-trusting trust manager
+	        SSLContext sc = SSLContext.getInstance("SSL");
+	        sc.init(null, trustAllCerts, new java.security.SecureRandom());
+	        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+
+	        // Create all-trusting host name verifier
+	        HostnameVerifier allHostsValid = new HostnameVerifier() {
+	            public boolean verify(String hostname, SSLSession session) {
+	                return true;
+	            }
+	        };
+
+	        // Install the all-trusting host verifier
+	        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	    } catch (KeyManagementException e) {
+	        e.printStackTrace();
+	    }
+	}
  
 	public static void main(String[] args) throws Exception {
 		try {
-			
-			KeyStore keyStore = KeyStore.getInstance(JKS);
-			keyStore.load(null, null);
-			
-			for(String certFile: certs) {
-				try(FileInputStream fileInputStream=new FileInputStream(certFile);
-						BufferedInputStream bufferedInputStream=new BufferedInputStream(fileInputStream)
-					){
-						while (bufferedInputStream.available() > 0) {
-							Certificate certificate = CertificateFactory.getInstance("X.509").generateCertificate(bufferedInputStream);
-							keyStore.setCertificateEntry(certFile, certificate);
-						}
-				}	
-			}
-			keyStore.store(new FileOutputStream(trustStorePath), password);
-			
-			
-			System.setProperty("javax.net.ssl.trustStore", trustStorePath);
-			System.setProperty("javax.net.ssl.trustStorePassword", new String(password));
-			System.setProperty("javax.net.ssl.trustStoreType", JKS);
-			
 			
 //			String username = "http_user1";
 //			String password = "9";
@@ -130,7 +141,8 @@ public class httpPostRequest {
 //			String base64Encoded = Base64.getEncoder().encodeToString(bytes);
 //			System.out.println("Base64 encoded text: " + base64Encoded);
 			
-			
+
+			disableSslVerification();
 			httpPostRequest instance = new httpPostRequest();
 			String response = instance.postMessage();
 			System.out.println(response);
