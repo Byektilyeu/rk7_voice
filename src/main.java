@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,10 +29,12 @@ public class main {
 			try {
 				sslDisable ssl = new sslDisable();
 				ssl.disableSslVerification();
+				
 				request instance = new request();
 				String response = instance.postMessage();
-//				String response = run();
+				
 				String qmsNum = null;
+				
 				JSONObject jsonObj = XML.toJSONObject(response);
 				JSONObject RK7QueryResult = (JSONObject) jsonObj.get("RK7QueryResult");
 				JSONObject CommandResult = (JSONObject) RK7QueryResult.get("CommandResult");
@@ -55,6 +58,15 @@ public class main {
 	            System.out.println("visit: " + visit);
 	            System.out.println("kdsstate: " + kdsstate);
 				System.out.println("qmsNumber: " + qmsNum);
+				
+				 FileWriter fw=new FileWriter("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\test.txt", true);    
+				 
+				 fw.write(kdsstate+"/"); 
+				 fw.write(String.valueOf(visit)+"/"); 
+				 fw.write(qmsNum+"/"); 
+				 fw.write(System.lineSeparator());
+				 fw.close();     
+		           
 			} catch(IOException ex) {
 				System.out.println("=======================" + ex);
 			}
