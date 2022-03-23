@@ -97,7 +97,6 @@ public class main {
 				} else {
 					kdsstate = null;
 					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
-					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
 				}
 				
 				InsertApp app = new InsertApp();
