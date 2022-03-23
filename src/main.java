@@ -10,7 +10,7 @@ import org.json.XML;
 public class main {
 
 	public static void main(String[] args) throws Exception {
-
+		playVoice music = new playVoice("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\voices\\101.wav");
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
 		new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -31,6 +31,7 @@ public class main {
 		try {
 			String qmsNum = null;
 			String kdsstate = null;
+			String newName = null;
 
 			sslDisable ssl = new sslDisable();
 			ssl.disableSslVerification();
@@ -77,7 +78,8 @@ public class main {
 					JSONObject Prop = (JSONObject) arrProp.getJSONObject(j);
 					String qmsNumber = (String) Prop.get("value");
 					if (qmsNumber.length() == 3) {
-						qmsNum = qmsNumber;
+					 qmsNum = qmsNumber;
+					 qmsNum = qmsNum.substring(0, 0)+'1'+qmsNum.substring(1);
 					}
 				}
 
