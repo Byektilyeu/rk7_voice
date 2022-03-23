@@ -21,7 +21,8 @@ public class requestGetOrderList {
 		byte[] bytes = auth.getBytes(StandardCharsets.UTF_8);
 		String base64Encoded = Base64.getEncoder().encodeToString(bytes);
 		String authHeaderValue = "Basic " + new String(base64Encoded);
-		System.out.println("Base64 encoded text: " + base64Encoded);
+		System.out.println("--------------------------------------------------------------------------------------------");
+		System.out.println("Хүсэлт илгээж буй хэрэглэгчийн токен: => " + base64Encoded);
 
 		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 
@@ -35,13 +36,9 @@ public class requestGetOrderList {
 
 		// Send post request
 		conn.setDoOutput(true);
-
-		System.out.println(" -------------------------");
 		DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
 
-		final String msg = "<RK7Query>\r\n"
-				+ " <RK7Command CMD=\"GetOrderList\">\r\n"
-				+ " </RK7Command>\r\n"
+		final String msg = "<RK7Query>\r\n" + " <RK7Command CMD=\"GetOrderList\">\r\n" + " </RK7Command>\r\n"
 				+ "</RK7Query>";
 		wr.writeBytes(msg);
 //			 send request
