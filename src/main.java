@@ -105,7 +105,7 @@ public class main {
 				app.insert(visit1, qmsNum, kdsstate );
 
 				// text file руу бичиж, хадгалах
-				FileWriter fw = new FileWriter("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\test.txt", true);
+				FileWriter fw = new FileWriter("C:\\UCS\\QMSVoice\\rk7_voice\\test.txt", true);
 				fw.write(kdsstate + "/");
 				fw.write(String.valueOf(visit1) + "/");
 				fw.write(qmsNum + "/");
