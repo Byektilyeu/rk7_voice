@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class InsertApp {
     private Connection connect(){
-        String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
+        String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\voice.db";
         Connection conn = null;
         try {
             conn= DriverManager.getConnection(url);
@@ -15,16 +15,17 @@ public class InsertApp {
         }
         return conn;
     }
-    public void insert(Integer visit, String qmsNumber, String kdsState)
+    public void insert(Integer visit, String qmsNumber, String kdsState, Boolean voiceState)
 
     {
 
-        String sql = "INSERT INTO orders(visit, qmsNumber, kdsState, capacity) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO orders(visit, qmsNumber, kdsState, voiceState) VALUES(?,?,?,?)";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = connect().prepareStatement(sql)) {
             pstmt.setInt(1, visit);
             pstmt.setString(2, qmsNumber);
             pstmt.setString(3, kdsState);
+            pstmt.setBoolean(4, voiceState);
             pstmt.executeUpdate();
         }
         catch (SQLException e){

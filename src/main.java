@@ -10,7 +10,7 @@ import org.json.XML;
 public class main {
 
 	public static void main(String[] args) throws Exception {
-		playVoice music = new playVoice("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\voices\\101.wav");
+		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
 		new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -32,6 +32,7 @@ public class main {
 			String qmsNum = null;
 			String kdsstate = null;
 			String newName = null;
+			Boolean voiceState = false;
 
 			sslDisable ssl = new sslDisable();
 			ssl.disableSslVerification();
@@ -102,7 +103,7 @@ public class main {
 				}
 				
 				InsertApp app = new InsertApp();
-				app.insert(visit1, qmsNum, kdsstate );
+				app.insert(visit1, qmsNum, kdsstate, voiceState);
 
 				// text file руу бичиж, хадгалах
 				FileWriter fw = new FileWriter("C:\\UCS\\QMSVoice\\rk7_voice\\test.txt", true);
