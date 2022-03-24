@@ -11,11 +11,21 @@ public class main {
 
 	public static void main(String[] args) throws Exception {
 
+		Voice voice = new Voice();
+		new Timer().scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					voice.voiceP();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}, 0, 10000);
 
-		voiceRead voiceread = new voiceRead();
-		String voice = voiceread.getGreaterThanZero();
 
-		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\"+voice+".wav");
+
 
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
