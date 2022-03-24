@@ -17,7 +17,7 @@ public class voiceRead {
 
 
         String sql = "SELECT visit, qmsNumber, voiceState "
-                + "FROM orders WHERE voiceState = 1 AND kdsState = 'ready'";
+                + "FROM orders WHERE voiceState = 0 AND kdsState = 'ready' Limit 1";
         String qmsNum = null;
         Boolean voiceState = false;
         Integer visit;
