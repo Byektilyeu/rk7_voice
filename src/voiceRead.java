@@ -13,22 +13,26 @@ public class voiceRead {
         return conn;
     }
 
-    public String getGreaterThanZero(String qmsNumber) {
-        Boolean voiceState = false;
+    public String getGreaterThanZero() {
+
         String sql = "SELECT visit, qmsNumber, voiceState "
                 + "FROM orders WHERE voiceState = 0";
+        String qmsNum = null;
+        Boolean voiceState = false;
+
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setBoolean(1, voiceState);
+
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
                 //visit = rs.getInt("visit") ;
-                qmsNumber   =     rs.getString("qmsNumber");
-                voiceState =       rs.getBoolean("voiceState");
+                 qmsNum = rs.getString("qmsNumber");
+                voiceState = rs.getBoolean("voiceState");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return qmsNumber;
+        return qmsNum;
     }
 }

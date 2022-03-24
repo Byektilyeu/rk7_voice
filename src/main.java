@@ -11,7 +11,11 @@ public class main {
 
 	public static void main(String[] args) throws Exception {
 
-		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
+
+		voiceRead voiceread = new voiceRead();
+		String voice = voiceread.getGreaterThanZero();
+
+		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\"+voice+".wav");
 
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
@@ -33,7 +37,6 @@ public class main {
 		try {
 			String qmsNum = null;
 			String kdsstate = null;
-			String newName = null;
 			Boolean voiceState = false;
 
 			sslDisable ssl = new sslDisable();
