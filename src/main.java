@@ -10,7 +10,7 @@ import org.json.XML;
 public class main {
 
 	public static void main(String[] args) throws Exception {
-		playVoice music = new playVoice("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\voices\\101.wav");
+		
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
 		new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -23,7 +23,7 @@ public class main {
 					e.printStackTrace();
 				}
 			}
-		}, 0, 1000);
+		}, 0, 5000);
 	}
 
 	// Үндсэн функц
@@ -53,7 +53,7 @@ public class main {
 			JSONObject RK7QueryResultOrderList = (JSONObject) jsonGetOrderList.get("RK7QueryResult");
 			JSONObject CommandResultOrderList = (JSONObject) RK7QueryResultOrderList.get("CommandResult");
 			JSONArray arrVisit = (JSONArray) CommandResultOrderList.getJSONArray("Visit");
-
+			playVoice music = new playVoice("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\voices\\101.wav");
 			for (int i = 0; i < arrVisit.length(); i++) {
 				JSONObject Visit = (JSONObject) arrVisit.getJSONObject(i);
 				JSONObject Orders = (JSONObject) Visit.get("Orders");
@@ -103,6 +103,7 @@ public class main {
 				
 				InsertApp app = new InsertApp();
 				app.insert(visit1, qmsNum, kdsstate );
+
 
 				// text file руу бичиж, хадгалах
 				FileWriter fw = new FileWriter("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\test.txt", true);
