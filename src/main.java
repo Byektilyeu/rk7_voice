@@ -11,7 +11,8 @@ public class main {
 
 	public static void main(String[] args) throws Exception {
 
-//		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
+		playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
+
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
 		new Timer().scheduleAtFixedRate(new TimerTask() {
@@ -100,7 +101,6 @@ public class main {
 					System.out.println("kdsstate: => " + kdsstate);
 				} else {
 					kdsstate = null;
-					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
 					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
 				}
 				
