@@ -26,7 +26,6 @@ public class main {
 
 
 
-
 		// 3 секундад нэг удаа, сервер рүү хүсэлт илгээдэг функцүүдийг дуудаж
 		// ажиллуулдаг функц
 		new Timer().scheduleAtFixedRate(new TimerTask() {

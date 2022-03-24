@@ -15,10 +15,12 @@ public class voiceRead {
 
     public String getGreaterThanZero() {
 
+
         String sql = "SELECT visit, qmsNumber, voiceState "
-                + "FROM orders WHERE voiceState = 0";
+                + "FROM orders WHERE voiceState = 1 AND kdsState = 'ready'";
         String qmsNum = null;
         Boolean voiceState = false;
+        Integer visit;
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -26,7 +28,7 @@ public class voiceRead {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                //visit = rs.getInt("visit") ;
+                visit = rs.getInt("visit") ;
                  qmsNum = rs.getString("qmsNumber");
                 voiceState = rs.getBoolean("voiceState");
             }
@@ -34,5 +36,23 @@ public class voiceRead {
             System.out.println(e.getMessage());
         }
         return qmsNum;
+
     }
-}
+    public void updateVoiceState() {
+        String updQmsNumber = getGreaterThanZero();
+        //Voice voice = new Voice();
+       // String voiceQMS = voice.voiceP();
+        System.out.println("+/+/+/+/+/+/+/+" + updQmsNumber);
+        String sql =  "UPDATE orders SET voiceState = '1'  "
+               + "WHERE  qmsNumber = " + updQmsNumber +" ";
+        try (Connection conn = this.connect();
+        PreparedStatement pstmt =  conn.prepareStatement(sql)){
+            pstmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    }
