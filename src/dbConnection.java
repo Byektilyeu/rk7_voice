@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class dbConnection {
      public static void createNewDatabase(String filename){
-         String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\" + filename;
+         String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\" + filename;
          try (Connection conn = DriverManager.getConnection(url)){
              if (conn != null){
                  DatabaseMetaData meta = conn.getMetaData();
@@ -19,7 +19,7 @@ public  void createNewDb(){
 }
 
 public static void createNewTable(){
-         String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
+         String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\voice.db";
 
          String sql = "CREATE TABLE IF NOT EXISTS orders (\n"
                  + "	visit integer PRIMARY KEY,\n"

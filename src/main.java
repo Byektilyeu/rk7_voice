@@ -68,7 +68,7 @@ public class main {
 			JSONObject RK7QueryResultOrderList = (JSONObject) jsonGetOrderList.get("RK7QueryResult");
 			JSONObject CommandResultOrderList = (JSONObject) RK7QueryResultOrderList.get("CommandResult");
 			JSONArray arrVisit = (JSONArray) CommandResultOrderList.getJSONArray("Visit");
-			playVoice music = new playVoice("C:\\Users\\Lenovo T470\\Desktop\\RK7Voice\\voices\\101.wav");
+			playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
 			for (int i = 0; i < arrVisit.length(); i++) {
 				JSONObject Visit = (JSONObject) arrVisit.getJSONObject(i);
 				JSONObject Orders = (JSONObject) Visit.get("Orders");
@@ -122,14 +122,14 @@ public class main {
 					kdsstate = (String) Order.get("kdsstate");
 					System.out.println("kdsstate: => " + kdsstate);
 				} else {
-					kdsstate = null;
+					kdsstate = "a";
 					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
 				}
 
 				String kdsStdateDB = getOrder.getKdsStateDB(visit1);
 				System.out.println("))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))" + kdsStdateDB);
 				if(kdsstate != kdsStdateDB){
-					getOrder.updateKdsState(kdsStdateDB);
+					getOrder.updateKdsState(kdsStdateDB, kdsstate, qmsNum);
 				}
 
 				InsertApp app = new InsertApp();
