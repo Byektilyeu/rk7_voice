@@ -22,7 +22,7 @@ public class main {
 					e.printStackTrace();
 				}
 			}
-		}, 0, 9000);
+		}, 0, 5500);
 
 
 
