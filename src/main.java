@@ -50,8 +50,8 @@ public class main {
 
 			sslDisable ssl = new sslDisable();
 			ssl.disableSslVerification();
-			
-			
+
+
 			dbConnection database = new dbConnection();
 			database.createNewDb();
 			database.createNewTable();
@@ -99,8 +99,8 @@ public class main {
 					JSONObject Prop = (JSONObject) arrProp.getJSONObject(j);
 					String qmsNumber = (String) Prop.get("value");
 					if (qmsNumber.length() == 3) {
-					 qmsNum = qmsNumber;
-					 qmsNum = qmsNum.substring(0, 0)+'1'+qmsNum.substring(1);
+						qmsNum = qmsNumber;
+						qmsNum = qmsNum.substring(0, 0)+'1'+qmsNum.substring(1);
 					}
 				}
 

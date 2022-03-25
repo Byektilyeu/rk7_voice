@@ -31,7 +31,7 @@ public class voiceRead {
                 voiceState = rs.getBoolean("voiceState");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Greater than zero error" + e.getMessage());
         }
         return qmsNum;
     }
@@ -48,7 +48,7 @@ public class voiceRead {
             pstmt.executeUpdate();
 
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println("UpdateVoiceState error" + e.getMessage());
         }
 
     }
