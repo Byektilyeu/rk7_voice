@@ -65,8 +65,7 @@ public class requestGetOrder {
 
 
     private Connection connect() {
-
-        String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\voice.db";
+        String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -92,14 +91,14 @@ public class requestGetOrder {
         return kdsState;
     }
 
-    public void updateKdsState(String kdsStateDB, String kdsState, String qmsNumber) {
-        String sql = "UPDATE orders SET kdsState = "+"'" + kdsState + "'"+""
-                + "WHERE  qmsNumber = "+"'" + qmsNumber + "'"+" ";
+    public void updateKdsState(String kdsStateDB) {
+        String sql = "UPDATE orders SET kdsState = " + kdsStateDB + ""
+                + "WHERE  kdsState = " + kdsStateDB + " ";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("update kdsstae error" + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
