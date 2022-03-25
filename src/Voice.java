@@ -10,7 +10,4 @@ public class Voice {
         qmsnumber.updateVoiceState();
         return voice;
     }
-
-
-
 }

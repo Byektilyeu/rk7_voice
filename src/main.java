@@ -68,7 +68,7 @@ public class main {
 			JSONObject RK7QueryResultOrderList = (JSONObject) jsonGetOrderList.get("RK7QueryResult");
 			JSONObject CommandResultOrderList = (JSONObject) RK7QueryResultOrderList.get("CommandResult");
 			JSONArray arrVisit = (JSONArray) CommandResultOrderList.getJSONArray("Visit");
-			playVoice music = new playVoice("C:\\UCS\\QMSVoice\\rk7_voice\\voices\\101.wav");
+
 			for (int i = 0; i < arrVisit.length(); i++) {
 				JSONObject Visit = (JSONObject) arrVisit.getJSONObject(i);
 				JSONObject Orders = (JSONObject) Visit.get("Orders");
@@ -105,10 +105,6 @@ public class main {
 				}
 
 				int visit1 = (int) Order.get("visit");
-
-
-
-
 
 				System.out.println("GETORDER XML DATA: => " + response);
 				System.out.println("GETORDER JSON DATA: => " + jsonGetOrder);
