@@ -65,7 +65,6 @@ public class requestGetOrder {
 
 
     private Connection connect() {
-
         String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
         Connection conn = null;
         try {
