@@ -91,9 +91,9 @@ public class requestGetOrder {
         return kdsState;
     }
 
-    public void updateKdsState(String kdsStateDB) {
-        String sql = "UPDATE orders SET kdsState = " + kdsStateDB + ""
-                + "WHERE  kdsState = " + kdsStateDB + " ";
+    public void updateKdsState(String kdsStateDB, String qmsNumber, String kdsState) {
+        String sql = "UPDATE orders SET kdsState = " + kdsState + ""
+                + "WHERE  qmsNumber = " + qmsNumber + " ";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
