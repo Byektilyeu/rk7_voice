@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class InsertApp {
     private Connection connect(){
-        String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\voice.db";
+        String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
         Connection conn = null;
         try {
             conn= DriverManager.getConnection(url);

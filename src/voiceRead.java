@@ -3,7 +3,7 @@ import java.sql.*;
 public class voiceRead {
     private Connection connect() {
 
-        String url = "jdbc:sqlite:C:\\UCS\\QMSVoice\\rk7_voice\\db\\voice.db";
+        String url = "jdbc:sqlite:C:\\UCS\\Voice\\rk7_voice-master\\db\\voice.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -14,8 +14,6 @@ public class voiceRead {
     }
 
     public String getGreaterThanZero() {
-
-
         String sql = "SELECT visit, qmsNumber, voiceState "
                 + "FROM orders WHERE voiceState = 1 AND kdsState = 'ready'";
         String qmsNum = null;
@@ -36,8 +34,8 @@ public class voiceRead {
             System.out.println(e.getMessage());
         }
         return qmsNum;
-
     }
+
     public void updateVoiceState() {
         String updQmsNumber = getGreaterThanZero();
         //Voice voice = new Voice();

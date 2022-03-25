@@ -82,6 +82,12 @@ public class main {
 
 				JSONObject jsonGetOrder = XML.toJSONObject(response);
 
+
+
+
+
+
+
 				// GetOrder-ийн json өгөгдлийг задалж хэрэгтэй өгөдлүүдийг авах
 				JSONObject RK7QueryResult = (JSONObject) jsonGetOrder.get("RK7QueryResult");
 				JSONObject CommandResult = (JSONObject) RK7QueryResult.get("CommandResult");
@@ -100,6 +106,10 @@ public class main {
 
 				int visit1 = (int) Order.get("visit");
 
+
+
+
+
 				System.out.println("GETORDER XML DATA: => " + response);
 				System.out.println("GETORDER JSON DATA: => " + jsonGetOrder);
 				System.out.println("GETORDERLIST JSON DATA: => " + jsonGetOrderList);
@@ -115,18 +125,16 @@ public class main {
 					kdsstate = null;
 					System.out.println("!!! Уучлаарай, " + qmsNum + " захиалгын өгөгдөлд kdsstate олдоогүй !!!");
 				}
-				
+
+				String kdsStdateDB = getOrder.getKdsStateDB(visit1);
+				System.out.println("))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))" + kdsStdateDB);
+				if(kdsstate != kdsStdateDB){
+					getOrder.updateKdsState(kdsStdateDB);
+				}
+
 				InsertApp app = new InsertApp();
 				app.insert(visit1, qmsNum, kdsstate, voiceState);
 
-
-				// text file руу бичиж, хадгалах
-				FileWriter fw = new FileWriter("C:\\UCS\\QMSVoice\\rk7_voice\\test.txt", true);
-				fw.write(kdsstate + "/");
-				fw.write(String.valueOf(visit1) + "/");
-				fw.write(qmsNum + "/");
-				fw.write(System.lineSeparator());
-				fw.close();
 			}
 		} catch (IOException ex) {
 			System.out.println("Алдаа гарлаа: => " + ex);
