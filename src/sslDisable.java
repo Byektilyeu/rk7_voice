@@ -30,7 +30,7 @@ public class sslDisable {
 			sc.init(null, trustAllCerts, new java.security.SecureRandom());
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
-			// Create all-trusting host name verifier
+	  		// Create all-trusting host name verifier
 			HostnameVerifier allHostsValid = new HostnameVerifier() {
 				public boolean verify(String hostname, SSLSession session) {
 					return true;
